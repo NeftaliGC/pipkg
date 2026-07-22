@@ -21,8 +21,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/TU_USUARIO/ppm"
-Repository = "https://github.com/TU_USUARIO/ppm"
+Homepage = "https://github.com/Neftaligc/ppm"
+Repository = "https://github.com/Neftaligc/ppm"
 
 [project.scripts]
 ppm = "ppm.cli:main"
