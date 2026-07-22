@@ -53,4 +53,4 @@ pipkg install                    # sin argumentos = instala todo desde pipkg-loc
 
 ## Licencia
 
-GPLv3 o posterior — ver [LICENSE](LICENSE).
+GPLv3 o posterior — ver [LICENSE](https://github.com/NeftaliGC/pipkg/blob/main/LICENCE).
