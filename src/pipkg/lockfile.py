@@ -1,4 +1,4 @@
-# <ppm a gestor of pip dependencies>
+# pipkg a gestor of pip dependencies
 # Copyright (C) 2026 Neftaligc
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,4 +14,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-__version__ = "0.1.0"
+"""Lectura y escritura del lockfile pipkg-lock.json (equivalente a package-lock.json)."""
+
+import json
+from pathlib import Path
+
+LOCK_NAME = "pipkg-lock.json"
+
+
+def lock_path(root: Path) -> Path:
+    return root / LOCK_NAME
+
+
+def load_lock(root: Path) -> dict:
+    path = lock_path(root)
+    if not path.exists():
+        return {"lockfile_version": 1, "dependencies": {}}
+    return json.loads(path.read_text())
+
+
+def save_lock(root: Path, data: dict) -> None:
+    lock_path(root).write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")

@@ -1,4 +1,4 @@
-# <ppm a gestor of pip dependencies>
+# pipkg a gestor of pip dependencies
 # Copyright (C) 2026 Neftaligc
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,13 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-"""Lectura y escritura del manifiesto ppm.toml (equivalente a package.json)."""
+"""Lectura y escritura del manifiesto pipkg.toml (equivalente a package.json)."""
 
 from pathlib import Path
 
 import tomlkit
 
-MANIFEST_NAME = "ppm.toml"
+MANIFEST_NAME = "pipkg.toml"
 
 
 def manifest_path(root: Path) -> Path:
@@ -31,7 +31,7 @@ def load_manifest(root: Path) -> tomlkit.TOMLDocument:
     path = manifest_path(root)
     if not path.exists():
         raise FileNotFoundError(
-            f"No se encontró {MANIFEST_NAME} en {root}. Corré 'ppm init' primero."
+            f"No se encontró {MANIFEST_NAME} en {root}. Corré 'pipkg init' primero."
         )
     return tomlkit.parse(path.read_text())
 

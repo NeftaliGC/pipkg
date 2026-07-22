@@ -1,4 +1,4 @@
-# <ppm a gestor of pip dependencies>
+# pipkg a gestor of pip dependencies
 # Copyright (C) 2026 Neftaligc
 #
 # This program is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ def _package_name(spec: str) -> str:
 def install(root: Path, package_spec: str, dev: bool = False):
     """
     Instala package_spec (ej. 'requests' o 'requests>=2.30') con pip dentro del
-    venv del proyecto, y actualiza ppm-lock.json con todo lo nuevo que haya
+    venv del proyecto, y actualiza pipkg-lock.json con todo lo nuevo que haya
     quedado instalado (directo + transitivas), comparando el estado de
     site-packages antes y después.
 
@@ -71,7 +71,7 @@ def install(root: Path, package_spec: str, dev: bool = False):
 
 def uninstall(root: Path, name: str) -> str:
     """Desinstala un paquete y lo saca del lock. No limpia transitivas huérfanas
-    (eso queda para 'ppm prune' más adelante)."""
+    (eso queda para 'pipkg prune' más adelante)."""
     normalized = _normalize(name)
     result = venv_utils.pip_uninstall(root, normalized)
     if result.returncode != 0:
@@ -84,7 +84,7 @@ def uninstall(root: Path, name: str) -> str:
 
 
 def sync(root: Path):
-    """Instala en el venv exactamente lo que dice ppm-lock.json (reproducibilidad,
+    """Instala en el venv exactamente lo que dice pipkg-lock.json (reproducibilidad,
     equivalente a 'npm install' sin argumentos usando el lock existente)."""
     lock = lockfile.load_lock(root)
     specs = [f"{name}=={info['version']}" for name, info in lock["dependencies"].items()]

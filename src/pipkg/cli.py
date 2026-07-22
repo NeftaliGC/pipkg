@@ -1,4 +1,4 @@
-# <ppm a gestor of pip dependencies>
+# pipkg a gestor of pip dependencies
 # Copyright (C) 2026 Neftaligc
 #
 # This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,7 @@ def cmd_init(args):
         if venv_utils.venv_exists(root):
             print(f"Ya existe {manifest.MANIFEST_NAME} y .venv en este directorio. No hay nada que hacer.")
             return
-        # ppm.toml existe pero falta el venv: probablemente un proyecto recién clonado.
+        # pipkg.toml existe pero falta el venv: probablemente un proyecto recién clonado.
         print(f"Ya existe {manifest.MANIFEST_NAME} pero falta el entorno virtual (¿proyecto clonado?).")
         print("Creando entorno virtual en .venv ...")
         venv_utils.create_venv(root)
@@ -36,8 +36,8 @@ def cmd_init(args):
             lockfile.save_lock(root, {"lockfile_version": 1, "dependencies": {}})
         print()
         print("Entorno creado. Ahora corré:")
-        print('  eval "$(ppm activate)"')
-        print("  ppm install")
+        print('  eval "$(pipkg activate)"')
+        print("  pipkg install")
         return
 
     name = args.name or root.name
@@ -53,7 +53,7 @@ def cmd_init(args):
     print(f"Proyecto '{name}' inicializado.")
     print()
     print("Para activar el entorno, corré:")
-    print('  eval "$(ppm activate)"')
+    print('  eval "$(pipkg activate)"')
 
 
 def _ensure_gitignore(root: Path) -> None:
@@ -80,7 +80,7 @@ def cmd_activate(args):
 def cmd_install(args):
     root = Path.cwd()
     if not manifest.manifest_path(root).exists():
-        print(f"No se encontró {manifest.MANIFEST_NAME}. Corré 'ppm init' primero.", file=sys.stderr)
+        print(f"No se encontró {manifest.MANIFEST_NAME}. Corré 'pipkg init' primero.", file=sys.stderr)
         sys.exit(1)
 
     if not venv_utils.venv_exists(root):
@@ -90,12 +90,12 @@ def cmd_install(args):
     if not venv_utils.is_active(root):
         print(
             "Aviso: .venv no está activo en esta shell. Las dependencias se instalan "
-            "igual, pero para USARLAS corré: eval \"$(ppm activate)\"",
+            "igual, pero para USARLAS corré: eval \"$(pipkg activate)\"",
             file=sys.stderr,
         )
 
     if not args.package:
-        print("Instalando dependencias desde ppm-lock.json ...")
+        print("Instalando dependencias desde pipkg-lock.json ...")
         specs = resolver.sync(root)
         print(f"{len(specs)} paquete(s) instalado(s).")
         return
@@ -146,7 +146,7 @@ def cmd_export(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="ppm", description="Gestor de dependencias para Python (usa pip por debajo)"
+        prog="pipkg", description="Gestor de dependencias para Python (usa pip por debajo)"
     )
     sub = parser.add_subparsers(dest="command", required=True)
 

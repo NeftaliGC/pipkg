@@ -1,4 +1,4 @@
-# ppm - A manager for pip dependencies
+# pipkg - A manager for pip dependencies
 # Copyright (C) 2026 Neftaligc
 #
 # This program is free software: you can redistribute it and/or modify
@@ -59,7 +59,7 @@ def create_venv(root: Path) -> None:
 def _run_pip(root: Path, args: list) -> subprocess.CompletedProcess:
     python = venv_python(root)
     if not python.exists():
-        raise RuntimeError("No existe un entorno virtual. Corré 'ppm init' primero.")
+        raise RuntimeError("No existe un entorno virtual. Corré 'pipkg init' primero.")
     return subprocess.run(
         [str(python), "-m", "pip", *args], capture_output=True, text=True
     )

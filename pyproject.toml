@@ -1,6 +1,6 @@
 [project]
-name = "ppm"
-version = "0.1.0"
+name = "pipkg"
+version = "0.1.1"
 description = "Gestor de dependencias para Python, inspirado en npm/pnpm, usa pip por debajo"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -21,11 +21,11 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Neftaligc/ppm"
-Repository = "https://github.com/Neftaligc/ppm"
+Homepage = "https://github.com/Neftaligc/pipkg"
+Repository = "https://github.com/Neftaligc/pipkg"
 
 [project.scripts]
-ppm = "ppm.cli:main"
+pipkg = "pipkg.cli:main"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]

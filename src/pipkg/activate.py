@@ -1,4 +1,4 @@
-# <ppm a gestor of pip dependencies>
+# pipkg a gestor of pip dependencies
 # Copyright (C) 2026 Neftaligc
 #
 # This program is free software: you can redistribute it and/or modify

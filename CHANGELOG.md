@@ -4,15 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - MVP - 2026-06-21
+## [0.1.1] - 2026-06-22
+
+### Changed
+- Renamed project from **ppm** to **pipkg** to avoid collisions with existing projects.
+- All commands and files have been renamed accordingly:
+  - `ppm` → `pipkg`
+  - `ppm.toml` → `pipkg.toml`
+  - `ppm-lock.json` → `pipkg-lock.json`
+
+## [0.1.0] - 2026-06-21
+
+Initial MVP release.
 
 ### Added
-- `ppm init` crea el manifiesto (`ppm.toml`), el entorno virtual (`.venv`), el lock (`ppm-lock.json`) y un `.gitignore`. Es idempotente: si ya existe el manifiesto pero falta el venv (proyecto clonado), solo recrea el venv.
-- `ppm activate` imprime el comando de activación del venv para usar con `eval "$(ppm activate)"`, con detección automática de shell (bash/zsh/fish).
-- `ppm install <paquete>` instala con pip, actualiza el manifiesto y resuelve el lock completo (directas + transitivas) comparando el estado de `site-packages` antes/después.
-- `ppm install` (sin argumentos) reproduce el entorno exacto desde `ppm-lock.json`; crea el venv automáticamente si no existe.
-- `ppm uninstall <paquete>` desinstala y limpia manifiesto y lock.
-- `ppm list` lista dependencias distinguiendo directas de transitivas.
-- `ppm export` genera un `requirements.txt` reproducible con el árbol completo de versiones exactas.
-- Manejo de errores limpio para fallos esperables de pip (sin traceback).
-- Aviso cuando el `.venv` del proyecto no está activo en la shell actual.
+* `ppm init` creates the project manifest (`ppm.toml`), virtual environment (`.venv`), lock file (`ppm-lock.json`), and a `.gitignore`. It is idempotent: if the manifest already exists but the virtual environment is missing (e.g., in a cloned repository), it only recreates the virtual environment.
+* `ppm activate` prints the virtual environment activation command to be used with `eval "$(ppm activate)"`, with automatic shell detection (bash/zsh/fish).
+* `ppm install <package>` installs the package with pip, updates the manifest, and resolves the complete lock file (direct and transitive dependencies) by comparing the state of `site-packages` before and after the installation.
+* `ppm install` (without arguments) reproduces the exact environment from `ppm-lock.json`; it automatically creates the virtual environment if it does not exist.
+* `ppm uninstall <package>` uninstalls a package and updates both the manifest and the lock file.
+* `ppm list` lists dependencies, distinguishing between direct and transitive dependencies.
+* `ppm export` generates a reproducible `requirements.txt` containing the complete dependency tree with pinned versions.
+* Clean error handling for expected pip failures (no Python traceback).
+* Warns when the project's `.venv` is not active in the current shell.
